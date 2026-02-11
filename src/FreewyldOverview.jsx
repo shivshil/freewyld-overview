@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EVCalculator from "./EVCalculator.jsx";
+import BuildList from "./BuildList.jsx";
 
 const sections = [
   "The Two Entities",
@@ -10,6 +11,7 @@ const sections = [
   "AI Opportunity Map",
   "Key Numbers",
   "STR Enterprise Value Calculator",
+  "AI Build List",
 ];
 
 // ─── Reusable Components ───────────────────────────────────────
@@ -816,6 +818,7 @@ export default function FreewyldOverview() {
       case 5: return <AIOpportunityMap />;
       case 6: return <KeyNumbers />;
       case 7: return <EVCalculator />;
+      case 8: return <BuildList />;
       default: return null;
     }
   };
