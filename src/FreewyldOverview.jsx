@@ -9,6 +9,7 @@ const sections = [
   "Daily Operations",
   "Team & Roles",
   "AI Opportunity Map",
+  "Build Progress",
   "Key Numbers",
   "STR Enterprise Value Calculator",
   "AI Build List",
@@ -733,6 +734,319 @@ function AIOpportunityMap() {
   );
 }
 
+function BuildProgress() {
+  const STATUS_COLORS = {
+    "Delivered": "#10b981",
+    "In Progress": "#f59e0b",
+    "Scoped": "#3b82f6",
+    "Not Started": "#64748b",
+  };
+
+  const tracks = [
+    {
+      id: "P2",
+      name: "Revenue Audit Automation (RevRev Workbench)",
+      maps: "Maps to original P2 — Jasper sales bottleneck",
+      status: "Delivered",
+      color: "#3b82f6",
+      summary: "RevRev workbench at rpm.multipleabundance.com is the live audit platform. 181 prospects, 366 runs, 40K variables, 98 PriceLabs credentials. Phase 1 (MVP Audit Core) complete; Phase 2 (Pipeline Integration) in progress with 10/10 end-to-end iterations passing.",
+      tasks: [
+        { wk: "Wk1", done: true, label: "Prospect 99 demo failure → 9-class failure taxonomy + validation gate" },
+        { wk: "Wk1", done: true, label: "deep_audit_prospect.py: 9-step operator-meeting-level scrutiny" },
+        { wk: "Wk2", done: true, label: "Phillips PRO uplift engine with Jasper's V-shaped lookup tables" },
+        { wk: "Wk2", done: true, label: "3 Playwright scrapers: leaderboard, ROTB, booking window" },
+        { wk: "Wk3", done: true, label: "Ticketing system (backend + frontend), observation loop cron (30 min)" },
+        { wk: "Wk3", done: true, label: "GHL mirror: 2,640 contacts, 718 opps, 55 transcripts (full API sync)" },
+        { wk: "Wk3", done: true, label: "Phase 2: prospect creation flow + SSE-streamed execution + two-mode form" },
+        { wk: "Wk4", done: true, label: "validation_checklist.py gate + ci_audit_gate.py CI pre-deploy guard" },
+        { wk: "Wk4", done: true, label: "5 launchd agents stable: backend, frontend, cloudflared, tunnel, backup" },
+        { wk: "Wk6", done: false, label: "Phase 3: Full Audit Variables (161 vars, up from 7)" },
+        { wk: "Wk6", done: false, label: "Daan Aarts edge case — 149 listings only filling 2/14 vars" },
+      ],
+      win: "10/10 MVP audits passed (5 RM partner + 5 direct). Permanent quality gate prevents future Prospect 99-style demos.",
+      kpi: "Audits per month: trending toward 100+ target (was ~40 manual)",
+    },
+    {
+      id: "P3",
+      name: "Live RM Pipeline (PriceLabs Round-Trip)",
+      maps: "Maps to original P3 — Seasonality Pricing Agent (accelerated)",
+      status: "Delivered",
+      color: "#8b5cf6",
+      summary: "End-to-end PriceLabs → Slack → PriceLabs revenue management pipeline. First live API write executed 2026-04-25: 3 Coulter Pine date overrides lifted to LY booked floor. Encodes Jasper's pricing-strategy.md SOP — regime classifier + sliding-scale MPI target + LY-floor lifts.",
+      tasks: [
+        { wk: "Wk6", done: true, label: "pull_pricelabs.py: neighborhood + listings + overrides via Customer API" },
+        { wk: "Wk6", done: true, label: "recommend.py: regime classifier + LY-floor + raise/trim deltas (Jasper SOP)" },
+        { wk: "Wk6", done: true, label: "post_to_slack.py: Block Kit posts to #ai-implementation (no emojis)" },
+        { wk: "Wk6", done: true, label: "apply_overrides.py: live POST to /v1/listings/{id}/overrides" },
+        { wk: "Wk6", done: true, label: "v0.4 adversarial-verified: 3 silent-drop bugs caught and fixed" },
+        { wk: "Wk6", done: true, label: "FIRST LIVE WRITE: Coulter Pine 3 dates ($149→$157, $289→$319, $299→$319)" },
+        { wk: "Wk7+", done: false, label: "PriceLabs API key into 1Password; rotate from env" },
+        { wk: "Wk7+", done: false, label: "429/5xx retry handling (currently aborts on transient failure)" },
+        { wk: "Wk7+", done: false, label: "Per-stay-date market pickup vs LY (Customer API doesn't expose; need workaround)" },
+      ],
+      win: "Jasper asked for pull + apply + push on the 4/24 call. Delivered all 3 within 36 hours, with a real money-on-the-line write the next day.",
+      kpi: "Portfolio coverage: 26 action-months / 41 LY-floor gaps surfaced across 5 listings",
+    },
+    {
+      id: "FOUNDRY",
+      name: "Foundry OS Sidecar Coding Agent",
+      maps: "Emergent — built to compress feature-request → PR cycle",
+      status: "Delivered",
+      color: "#06b6d4",
+      summary: "Sidebar drawer on every (team)/* route lets Miles/Adriaan/Kammie/Kaye type a feature request. Routes through Bun service on Mac Studio, runs Claude Code in a fresh git worktree, verifies (typecheck/lint/build), pushes draft PR. Wired end-to-end 2026-04-21.",
+      tasks: [
+        { wk: "Wk5", done: true, label: "Bun service ~/freewyld-agent-service/server.ts on 127.0.0.1:9100" },
+        { wk: "Wk5", done: true, label: "launchd persistence + shared-secret auth (x-foundry-agent-secret header)" },
+        { wk: "Wk5", done: true, label: "Cloudflare Quick Tunnel isolated from named-tunnel config (no breakage)" },
+        { wk: "Wk5", done: true, label: "Tunnel-URL refresh helper script (URL rotates on cloudflared restart)" },
+        { wk: "Wk5", done: true, label: "Next.js proxy with Clerk auth gate at /api/agent/sessions/*" },
+        { wk: "Wk5", done: true, label: "agent-drawer.tsx mounted in (team)/layout.tsx header" },
+        { wk: "Wk5", done: true, label: "SSE log stream passthrough; verification stack PASS" },
+        { wk: "Wk7+", done: false, label: "Production: named tunnel + agent.freewyldfoundry.com CNAME" },
+      ],
+      win: "Team can now request features from inside the portal. First end-to-end: drawer prompt → draft PR in foundry-os.",
+      kpi: "Time from request to draft PR: minutes (was: scheduled call + handoff)",
+    },
+    {
+      id: "PORTAL",
+      name: "Foundry Portal Architecture (team.freewyld.com)",
+      maps: "Emergent — Ramp-model north star identified 2026-04-08",
+      status: "In Progress",
+      color: "#3b82f6",
+      summary: "Architecture decision 2026-04-08: grow RevRev Workbench INTO the central portal rather than building a new shell. RevRev already has Next.js + FastAPI + auth + tickets + monitoring. Ramp CPO/Jeff transcript identified as operational blueprint (agent-first, Slack-surfaced, builder tools for operators).",
+      tasks: [
+        { wk: "Wk4", done: true, label: "Architecture doc written 2026-04-08 (4 lanes × 6 agents)" },
+        { wk: "Wk4", done: true, label: "Ground-truth inventory 2026-04-11 (built vs aspirational)" },
+        { wk: "Wk4", done: true, label: "Ramp model identified as supersedes any n8n-visual-builder architecture" },
+        { wk: "Wk6", done: false, label: "n8n business logic rewrite (lead scoring, Jasper Framework prompt) → FastAPI routes" },
+        { wk: "Wk7+", done: false, label: "team.freewyld.com (internal) and app.freewyld.com (client) DNS + auth" },
+        { wk: "Wk7+", done: false, label: "Supabase vs SQLite migration decision" },
+      ],
+      win: "Avoided building a parallel portal shell. Stripe billing client already wired into RevRev (acct_1JjoarB4LXd8leQR, $47K available, 59 open invoices).",
+      kpi: "Portal feature parity: RevRev = 60% of intended portal scope",
+    },
+    {
+      id: "P1",
+      name: "Excel Data Workflow Automation",
+      maps: "Maps to original P1 — superseded by RevRev scrapers + GHL mirror",
+      status: "Scoped",
+      color: "#f59e0b",
+      summary: "Original P1 was 'auto-download and pre-analyze ~40 Excel sheets per manager per week.' Direction shifted: instead of mirroring Excel workflows, ingest the underlying APIs directly (PriceLabs Customer API, GHL API, Slack). Excel UX layer can come later if needed.",
+      tasks: [
+        { wk: "Wk2", done: true, label: "GHL full API sync (replaces manual contact + opp Excel pulls)" },
+        { wk: "Wk6", done: true, label: "PriceLabs neighborhood + overrides API (replaces manual CSV downloads)" },
+        { wk: "Wk5", done: true, label: "n8n workflows imported from Mac Mini (6 workflows, all non-portable)" },
+        { wk: "Wk7+", done: false, label: "Wheelhouse / Beyond / PMS connectors (each client uses different stacks)" },
+        { wk: "Wk7+", done: false, label: "Manager-facing dashboard view (40 sheets → one normalized pane)" },
+      ],
+      win: "Underlying-API approach delivers more leverage than Excel-mirroring would have. Two clients now run scraper-free.",
+      kpi: "Manager hours saved per week: target 2.5-5 hrs (not yet measured live)",
+    },
+    {
+      id: "STRIPE",
+      name: "Stripe Billing Integration",
+      maps: "Emergent — invoice automation for $25M/yr Foundry revenue",
+      status: "Scoped",
+      color: "#10b981",
+      summary: "stripe_client.py wired into RevRev. Read-only confirmed against acct_1JjoarB4LXd8leQR. $47K available balance, 59 open invoices visible. No client-facing route yet — needs UX decision (operator-facing vs client-portal).",
+      tasks: [
+        { wk: "Wk4", done: true, label: "stripe_client.py: read-only Stripe SDK wrapper" },
+        { wk: "Wk4", done: true, label: "Connected to live Freewyld account (acct_1JjoarB4LXd8leQR)" },
+        { wk: "Wk7+", done: false, label: "FastAPI route + frontend page (operator dashboard)" },
+        { wk: "Wk7+", done: false, label: "Open-invoice nudge automation (Slack/email)" },
+      ],
+      win: "Billing visibility unblocked — can now correlate RevRev managed-revenue numbers with Stripe receivables.",
+      kpi: "Open invoice count: 59 (visible, not yet actioned)",
+    },
+    {
+      id: "AGENTS",
+      name: "Six AI Agents (per Ramp blueprint)",
+      maps: "Emergent — agent-first architecture from Ramp CPO transcript",
+      status: "Not Started",
+      color: "#64748b",
+      summary: "Architecture doc calls for 6 agents: Deployment Monitor, Market Intelligence, Audit Generator, Pricing Agent, Comms Agent, Wild Chatbot. Audit Generator and Pricing Agent are effectively built (RevRev + Live RM Pipeline). Other 4 not started.",
+      tasks: [
+        { wk: "—", done: true, label: "Audit Generator (lives inside RevRev Workbench)" },
+        { wk: "—", done: true, label: "Pricing Agent v0.4 (Live RM Pipeline)" },
+        { wk: "Wk7+", done: false, label: "Deployment Monitor (60% built per inventory)" },
+        { wk: "Wk7+", done: false, label: "Market Intelligence (richest data exists, no agent)" },
+        { wk: "Wk7+", done: false, label: "Comms Agent (Kaye uses Claude directly today)" },
+        { wk: "Wk7+", done: false, label: "Wild Chatbot (TBD scope)" },
+      ],
+      win: "2 of 6 agents shipped within first 6 weeks of Ramp-model adoption.",
+      kpi: "Agents in production: 2 of 6",
+    },
+  ];
+
+  const counts = {
+    delivered: tracks.filter(t => t.status === "Delivered").length,
+    inProgress: tracks.filter(t => t.status === "In Progress").length,
+    scoped: tracks.filter(t => t.status === "Scoped").length,
+    notStarted: tracks.filter(t => t.status === "Not Started").length,
+  };
+
+  const totalTasks = tracks.reduce((acc, t) => acc + t.tasks.length, 0);
+  const doneTasks = tracks.reduce((acc, t) => acc + t.tasks.filter(x => x.done).length, 0);
+
+  return (
+    <div className="space-y-6">
+      <p className="text-gray-400 text-sm leading-relaxed">
+        Six weeks of build progress (Mar 18 → Apr 29, 2026). The original Feb 2026 plan named 3 priorities (P1/P2/P3). Reality: <strong className="text-white">P2 Audit Automation and P3 Pricing Agent shipped in production</strong>; P1 Excel Workflow was superseded by going direct-to-API; three new workstreams emerged (Foundry OS Sidecar, Portal Architecture, Stripe).
+      </p>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="rounded-lg border border-emerald-800/40 bg-emerald-950/20 p-3 text-center">
+          <div className="text-2xl font-bold text-emerald-400">{counts.delivered}</div>
+          <div className="text-xs text-gray-500 mt-1">Delivered</div>
+        </div>
+        <div className="rounded-lg border border-amber-800/40 bg-amber-950/20 p-3 text-center">
+          <div className="text-2xl font-bold text-amber-400">{counts.inProgress}</div>
+          <div className="text-xs text-gray-500 mt-1">In Progress</div>
+        </div>
+        <div className="rounded-lg border border-blue-800/40 bg-blue-950/20 p-3 text-center">
+          <div className="text-2xl font-bold text-blue-400">{counts.scoped}</div>
+          <div className="text-xs text-gray-500 mt-1">Scoped</div>
+        </div>
+        <div className="rounded-lg border border-gray-700/40 bg-gray-900/40 p-3 text-center">
+          <div className="text-2xl font-bold text-gray-400">{counts.notStarted}</div>
+          <div className="text-xs text-gray-500 mt-1">Not Started</div>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-gray-700/40 bg-gray-900/30 p-3 text-xs text-gray-400">
+        <strong className="text-white">{doneTasks}</strong> of <strong className="text-white">{totalTasks}</strong> tracked tasks complete across all workstreams.
+        Engagement: $6K/mo, Wk 6 of 6 in this reporting window.
+      </div>
+
+      <div className="space-y-3">
+        {tracks.map((t, i) => <BuildTrackCard key={i} track={t} statusColors={STATUS_COLORS} />)}
+      </div>
+
+      <div className="rounded-lg border border-amber-800/30 bg-amber-950/15 p-4">
+        <h4 className="text-sm font-semibold text-amber-400 mb-2">Last 6 Weeks — Headline</h4>
+        <div className="space-y-2 text-xs text-gray-300 leading-relaxed">
+          <p><strong className="text-white">Wk1 (Mar 18-24):</strong> Prospect 99 demo failure exposed 9 failure classes. Built validation gate + 9-step deep audit. Permanent quality scaffold installed.</p>
+          <p><strong className="text-white">Wk2 (Mar 25-31):</strong> Phillips PRO uplift engine with Jasper's V-shaped lookup tables. GHL full API sync (2,640 contacts).</p>
+          <p><strong className="text-white">Wk3 (Apr 1-7):</strong> RevRev Phase 2 pipeline integration. 3 Playwright scrapers. Ticketing system live. Observation loop on 30-min cron.</p>
+          <p><strong className="text-white">Wk4 (Apr 8-14):</strong> Foundry portal architecture doc + Ramp-model north star. Stripe billing client connected. n8n workflows imported (non-portable; need rewrite).</p>
+          <p><strong className="text-white">Wk5 (Apr 15-21):</strong> Foundry OS sidecar coding agent wired end-to-end. Team can now request features from inside the portal → draft PR in minutes.</p>
+          <p><strong className="text-white">Wk6 (Apr 22-28):</strong> Live RM Pipeline v0.4. First live PriceLabs API write 4/25: 3 Coulter Pine dates lifted to LY floor. Jasper's SOP encoded in code.</p>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-gray-700/40 bg-gray-900/30 p-4">
+        <h4 className="text-sm font-semibold text-gray-300 mb-2">Where the Original Plan Drifted (and Why)</h4>
+        <div className="space-y-2 text-xs text-gray-400 leading-relaxed">
+          <p><strong className="text-white">P1 Excel automation</strong> → went direct-to-API instead. Mirroring 40 Excel sheets per manager would have been brittle (every client runs different stacks); ingesting PriceLabs/GHL/Slack APIs gives the same data with less surface area.</p>
+          <p><strong className="text-white">P3 Pricing agent timeline</strong> compressed from "Months 2-4+" to Wk 6. Driver: Jasper's 4/24 ask was concrete (pull + apply + push), and PriceLabs Customer API has the right primitives. v0.4 with 3 silent-drop bugs caught is honest baseline, not vaporware.</p>
+          <p><strong className="text-white">Foundry OS Sidecar</strong> wasn't in the Feb plan. Built because team feature-requests were getting lost in Slack threads. Drawer + draft PR is the durable fix.</p>
+          <p><strong className="text-white">Performance guarantee unchanged.</strong> Live RM Pipeline writes are explicit-ask-only; no auto-runs. Validation gate blocks display of any prospect that doesn't pass 9-class check.</p>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-blue-800/30 bg-blue-950/15 p-4">
+        <h4 className="text-sm font-semibold text-blue-400 mb-2">Next 2-4 Weeks — Targeting</h4>
+        <div className="space-y-1.5 text-xs text-gray-300">
+          <div className="flex items-start gap-2"><span className="text-blue-400">→</span><span>RevRev Phase 3: full 161-variable audit (currently 7 MVP vars).</span></div>
+          <div className="flex items-start gap-2"><span className="text-blue-400">→</span><span>Live RM Pipeline hardening: API key into 1Password, 429/5xx retries, second pilot client.</span></div>
+          <div className="flex items-start gap-2"><span className="text-blue-400">→</span><span>Foundry OS named tunnel + agent.freewyldfoundry.com production DNS.</span></div>
+          <div className="flex items-start gap-2"><span className="text-blue-400">→</span><span>n8n business logic rewrite (lead scoring, Jasper Framework prompt) into FastAPI routes.</span></div>
+          <div className="flex items-start gap-2"><span className="text-blue-400">→</span><span>Stripe billing surface: open-invoice nudge automation.</span></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BuildTrackCard({ track, statusColors }) {
+  const [open, setOpen] = useState(false);
+  const doneCount = track.tasks.filter(t => t.done).length;
+  const totalCount = track.tasks.length;
+  const pct = Math.round((doneCount / totalCount) * 100);
+
+  return (
+    <div
+      className="rounded-xl border overflow-hidden"
+      style={{ borderColor: `${track.color}30`, background: `${track.color}05` }}
+    >
+      <div
+        className="p-4 cursor-pointer"
+        onClick={() => setOpen(!open)}
+      >
+        <div className="flex items-start justify-between gap-3 mb-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0"
+              style={{ background: `${track.color}20`, color: track.color }}
+            >
+              {track.id}
+            </div>
+            <div className="min-w-0">
+              <h4 className="font-bold text-sm text-white truncate">{track.name}</h4>
+              <span className="text-xs text-gray-500">{track.maps}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span
+              className="text-xs px-2 py-0.5 rounded-full font-medium"
+              style={{ background: `${statusColors[track.status]}20`, color: statusColors[track.status] }}
+            >
+              {track.status}
+            </span>
+            <span className="text-gray-600 text-xs">{open ? "▲" : "▼"}</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+          <div className="flex-1 h-1.5 rounded-full bg-gray-800 overflow-hidden">
+            <div className="h-full rounded-full" style={{ width: `${pct}%`, background: track.color }} />
+          </div>
+          <span>{doneCount}/{totalCount} ({pct}%)</span>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed">{track.summary}</p>
+      </div>
+
+      {open && (
+        <div className="border-t px-4 py-3 space-y-3" style={{ borderColor: `${track.color}15` }}>
+          <div>
+            <div className="text-xs font-semibold text-gray-400 mb-1.5">Tasks</div>
+            <div className="space-y-1">
+              {track.tasks.map((task, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 text-xs px-2 py-1.5 rounded"
+                  style={{ background: task.done ? `${track.color}08` : "rgba(0,0,0,0.2)", opacity: task.done ? 0.7 : 1 }}
+                >
+                  <span
+                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ background: task.done ? track.color : "#475569" }}
+                  />
+                  <span className={`flex-1 ${task.done ? "text-gray-400 line-through" : "text-gray-200"}`}>
+                    {task.label}
+                  </span>
+                  <span className="text-xs text-gray-600 flex-shrink-0">{task.wk}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="rounded p-2 bg-emerald-950/20 border border-emerald-900/20">
+              <div className="text-xs font-semibold text-emerald-400 mb-0.5">Win</div>
+              <div className="text-xs text-gray-300">{track.win}</div>
+            </div>
+            <div className="rounded p-2 bg-blue-950/20 border border-blue-900/20">
+              <div className="text-xs font-semibold text-blue-400 mb-0.5">KPI</div>
+              <div className="text-xs text-gray-300">{track.kpi}</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function KeyNumbers() {
   return (
     <div className="space-y-6">
@@ -816,9 +1130,10 @@ export default function FreewyldOverview() {
       case 3: return <DailyOps />;
       case 4: return <TeamRoles />;
       case 5: return <AIOpportunityMap />;
-      case 6: return <KeyNumbers />;
-      case 7: return <EVCalculator />;
-      case 8: return <BuildList />;
+      case 6: return <BuildProgress />;
+      case 7: return <KeyNumbers />;
+      case 8: return <EVCalculator />;
+      case 9: return <BuildList />;
       default: return null;
     }
   };
@@ -867,7 +1182,7 @@ export default function FreewyldOverview() {
 
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-gray-800/50 text-xs text-gray-600">
-          <p>Compiled from: website analysis, podcast catalog (690+ episodes), project transcripts, LinkedIn research, Acast data, Google reviews, VRMA conference intel. Last updated Feb 2026.</p>
+          <p>Compiled from: website analysis, podcast catalog (690+ episodes), project transcripts, LinkedIn research, Acast data, Google reviews, VRMA conference intel. Last updated Apr 29, 2026 (Build Progress through Wk 6).</p>
         </div>
       </div>
     </div>
